@@ -30,7 +30,7 @@ The generated assembly was the same. Hotspot was able to optimize both of them t
 
 [baseline.assembly.txt](https://github.com/DarkDimius/imp-bench/blob/master/baseline.assebly.txt) contains the assembly for the `implicitly[ClassTag[Int]]` where you can see that hotspot was able to get rid of all the overheads.
 
-Most of those 2.5 ns are actually taken by benchmark framework itself, so the actual number running time is a bad indicator here. What is a good indicator is the assembly printout iself, that shows that hotspot was able to remove static loads and virtual calls in this example.
+Most of those 2.5 ns are actually taken by benchmark framework itself. So, to be entirelly honest, the numbers that I showed earlier do not show anything. As those are simply benchmarking overheads of the jmh itself. What is a good indicator is the assembly printout iself: it shows that hotspot was able to remove static loads and virtual calls in this example.
 
 In order to reproduce this output you would need to run on Linux with `-prof perfasm`. You would also need a jvm that has dissassembler plugin installed. Setting it up is quite involved, and you'll likely need to build it from source of your version of JDK. Google for `hsdis` for more details.
 
