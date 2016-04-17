@@ -17,7 +17,7 @@ I've checked. And what I can say is that on Oracle HotSpot version "1.8.0_72" it
 
 You can re-run those benchmarks by calling
 
-  jmh:run -i 10 -wi 10 -f3 -t 1
+     jmh:run -i 10 -wi 10 -f3 -t 1
 
 Optionally, you could also use JVM dissasemmler plugin to see if generated assembly differs as I did.
 The generated assembly was the same. Hotspot was able to optimize both of them to a single read of the very same constant object.
