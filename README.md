@@ -11,7 +11,7 @@ This is the state-of-the art tool avaliable for JVM. In this [thread] (https://g
 
 ## Result
 
-I've checked. And what I can say is that on Oracle HotSpot version "1.8.0_72" it's not. Actually, both of them get optimized by JVM to be a simple load of same constant.
+I've checked. And what I can say is that on Oracle HotSpot version "1.8.0_72"(x86_64 ubuntu i7-4770) it's not. Actually, both of them get optimized by JVM to be a simple load of same constant.
 
 ```
 [info] Benchmark                       Mode  Cnt  Score   Error  Units
