@@ -21,17 +21,20 @@ I've checked. And what I can say is that on Oracle HotSpot version "1.8.0_72"(x8
 [info] ImplVsImplicitly.measure:·asm   avgt         NaN            ---
 ```
 ## Run it yourself
-You can re-run those benchmarks by calling
+You can re-run those benchmarks by executing in sbt promt:
 
      jmh:run -i 10 -wi 10 -f3 -t 1
-## Low level details
-Optionally, you could also use JVM dissasemmler plugin to see if generated assembly differs as I did.
-The generated assembly was the same. Hotspot was able to optimize both of them to a single read of the very same constant object. The assembly suggest that the actuall running time is around _1 nanosecond_ in both cases as second nanosecond is taken by benchmarking framework itself. 
+## Runtime low-level details
+I've had a look on assembly generated for both methods.
+The generated assembly was the same. Hotspot was able to optimize both of them to a single read of the very same constant object.
 
 [baseline.assembly.txt](https://github.com/DarkDimius/imp-bench/blob/master/baseline.assebly.txt) contains the assembly for the `implicitly[ClassTag[Int]]` where you can see that hotspot was able to get rid of all the overheads.
 
-In order to reproduce this outputm you would need to run on Linux with `-prof perfasm`. You would also need a jvm that has dissassembler plugin installed. Setting it up is quite involved, and you'll likely need to build it from source of your version of JDK. Google for `hsdis` for more details.
+Most of those 2.5 ns are actually taken by benchmark framework itself, so the actual number running time is a bad indicator here. What is a good indicator is the assembly printout iself, that shows that hotspot was able to remove static loads and virtual calls in this example.
 
+In order to reproduce this output you would need to run on Linux with `-prof perfasm`. You would also need a jvm that has dissassembler plugin installed. Setting it up is quite involved, and you'll likely need to build it from source of your version of JDK. Google for `hsdis` for more details.
+
+# Bytecode difference
 There is a small difference in the size of generated method:
 `implicitly[ClassTag[Int]]` becomes
 
