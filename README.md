@@ -1,9 +1,15 @@
+#Imp vs Implicitly
 I've made this repo in order to benchmark https://github.com/non/imp
 that claims to implement a faster `implicitly`.
 
 I'm trying to check it's particular claim that `implicitly[ClassTag[Int]]` is slower than `imp[ClassTag[Int]]`.
 
+##Benchmarking framework used
 I do it by using the best benchmarking tool available for JVM: http://openjdk.java.net/projects/code-tools/jmh/
+
+This is the state-of-the art tool avaliable for JVM. In this [thread] (https://groups.google.com/forum/#!topic/mechanical-sympathy/m4opvy4xq3U) you can see many problems that make most of benchmarking frameworks unreliable or simply wrong for that kind of benchmark.
+
+## Result
 
 I've checked. And what I can say is that on Oracle HotSpot version "1.8.0_72" it's not. Actually, both of them get optimized by JVM to be a simple load of same constant.
 
@@ -14,11 +20,12 @@ I've checked. And what I can say is that on Oracle HotSpot version "1.8.0_72" it
 [info] ImplVsImplicitly.measure        avgt   30  2.491 ± 0.044  ns/op
 [info] ImplVsImplicitly.measure:·asm   avgt         NaN            ---
 ```
-
+## Run it yourself
 You can re-run those benchmarks by calling
 
      jmh:run -i 10 -wi 10 -f3 -t 1
 
+## Low level details
 Optionally, you could also use JVM dissasemmler plugin to see if generated assembly differs as I did.
 The generated assembly was the same. Hotspot was able to optimize both of them to a single read of the very same constant object.
 
@@ -40,3 +47,7 @@ while `impl[ClassTag[Int]]` becomes
 
 
 This may lead to methods containing many calls to `implicitly` being less likely to be inlined, but it would argue this is very uncommon.
+
+## Contributions
+
+I'd be very glad to see a PR that would prove me wrong. I'll learn something this way :-).
