@@ -1,4 +1,4 @@
-package impbench
+package addable
 
 object Addable {
 
