@@ -1,0 +1,176 @@
+[info] Result "baseline":
+[info]   2.660 ±(99.9%) 0.096 ns/op [Average]
+[info]   (min, avg, max) = (2.585, 2.660, 2.796), stdev = 0.063
+[info]   CI (99.9%): [2.564, 2.755] (assumes normal distribution)
+[info]
+[info] Secondary result "·asm":
+[info] PrintAssembly processed: 327982 total address lines.
+[info] Perf output processed (skipped 10.892 seconds):
+[info]  Column 1: cycles (14392 events)
+[info]  Column 2: instructions (14446 events)
+[info]
+[info] Hottest code regions (>10.00% "cycles" events):
+[info] ....[Hottest Region 1]..............................................................................
+[info]  [0x7ff7173aded8:0x7ff7173adf32] in org.openjdk.jmh.infra.Blackhole::consume
+[info]
+[info]                      0x00007ff7173aded8: nop
+[info]                      0x00007ff7173aded9: nop
+[info]                      0x00007ff7173adeda: nop
+[info]                      0x00007ff7173adedb: nop
+[info]                      0x00007ff7173adedc: nop
+[info]                      0x00007ff7173adedd: nop
+[info]                      0x00007ff7173adede: nop
+[info]                      0x00007ff7173adedf: nop
+[info]                    [Verified Entry Point]
+[info]                      ;; B1: #	B3 B2 &lt;- BLOCK HEAD IS JUNK   Freq: 1
+[info]   9.78%   11.51%     0x00007ff7173adee0: mov    %eax,-0x16000(%rsp)
+[info]   0.58%    0.53%     0x00007ff7173adee7: push   %rbp
+[info]   9.30%   11.21%     0x00007ff7173adee8: sub    $0x10,%rsp         ;*synchronization entry
+[info]                                                                    ; - org.openjdk.jmh.infra.Blackhole::consume@-1 (line 299)
+[info]   0.43%    0.51%     0x00007ff7173adeec: mov    0xc4(%rsi),%r11d   ;*getfield tlrMask
+[info]                                                                    ; - org.openjdk.jmh.infra.Blackhole::consume@1 (line 299)
+[info]   0.06%    0.01%     0x00007ff7173adef3: imul   $0x19660d,0xc0(%rsi),%r10d
+[info]  10.46%   13.06%     0x00007ff7173adefe: add    $0x3c6ef35f,%r10d  ;*iadd
+[info]                                                                    ; - org.openjdk.jmh.infra.Blackhole::consume@15 (line 300)
+[info]   4.25%    4.50%     0x00007ff7173adf05: mov    %r10d,0xc0(%rsi)   ;*putfield tlr
+[info]                                                                    ; - org.openjdk.jmh.infra.Blackhole::consume@17 (line 300)
+[info]   7.32%    6.08%     0x00007ff7173adf0c: and    %r11d,%r10d
+[info]   0.26%    0.14%     0x00007ff7173adf0f: test   %r10d,%r10d
+[info]                   ╭  0x00007ff7173adf12: je     0x00007ff7173adf20  ;*return
+[info]                   │                                                ; - org.openjdk.jmh.infra.Blackhole::consume@41 (line 306)
+[info]                   │  ;; B2: #	N68 &lt;- B3 B1  Freq: 1
+[info]   9.56%    7.37%  │  0x00007ff7173adf14: add    $0x10,%rsp
+[info]            0.01%  │  0x00007ff7173adf18: pop    %rbp
+[info]   0.24%    0.33%  │  0x00007ff7173adf19: test   %eax,0x1a2160e1(%rip)        # 0x00007ff7315c4000
+[info]                   │                                                ;   {poll_return}
+[info]                   │  0x00007ff7173adf1f: retq
+[info]                   │  ;; B3: #	B2 &lt;- B1  Freq: 4.17233e-05
+[info]                   ↘  0x00007ff7173adf20: shl    %r11d
+[info]                      0x00007ff7173adf23: mov    %rsi,%r10
+[info]                      0x00007ff7173adf26: inc    %r11d
+[info]                      0x00007ff7173adf29: shr    $0x9,%r10
+[info]                      0x00007ff7173adf2d: mov    %rdx,%r8
+[info]                      0x00007ff7173adf30: push   %r10
+[info]                      0x00007ff7173adf32: cmp    0x195e8257(%rip),%r12        # 0x00007ff730996190
+[info] ....................................................................................................
+[info]  52.24%   55.25%  <total for region 1>
+[info]
+[info] ....[Hottest Region 2]..............................................................................
+[info]  [0x7ff7173ab115:0x7ff7173ab181] in bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub
+[info]
+[info]                      ;; B9: #	B10 &lt;- B8  Freq: 0.999974
+[info]                      0x00007ff7173ab115: mov    $0x1,%ebp
+[info]                      0x00007ff7173ab11a: nop
+[info]                      0x00007ff7173ab11b: nop
+[info]                      0x00007ff7173ab11c: nop
+[info]                      0x00007ff7173ab11d: nop
+[info]                      0x00007ff7173ab11e: nop
+[info]                      0x00007ff7173ab11f: nop                       ;*aload
+[info]                                                                    ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@13 (line 163)
+[info]                      ;; B10: #	B20 B11 &lt;- B9 B13 	Loop: B10-B13 inner  Freq: 83147.4
+[info]   0.40%    0.48%  ↗  0x00007ff7173ab120: movabs $0x71b514600,%r10  ;   {oop(a &apos;scala/reflect/ClassTag$&apos;)}
+[info]                   │  0x00007ff7173ab12a: mov    0x24(%r10),%r10d   ;*getfield Int
+[info]                   │                                                ; - scala.reflect.ClassTag$::Int@1 (line 117)
+[info]                   │                                                ; - bench.ImplVsImplicitly::baseline@6 (line 16)
+[info]                   │                                                ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@16 (line 163)
+[info]   9.37%    9.44%  │  0x00007ff7173ab12e: mov    0x8(%r12,%r10,8),%r11d  ; implicit exception: dispatches to 0x00007ff7173ab1ed
+[info]                   │  ;; B11: #	B19 B12 &lt;- B10  Freq: 83147.3
+[info]   0.11%    0.05%  │  0x00007ff7173ab133: cmp    $0xf8024522,%r11d  ;   {metadata(&apos;scala/reflect/ManifestFactory$$anon$9&apos;)}
+[info]                   │  0x00007ff7173ab13a: jne    0x00007ff7173ab1d5  ;*checkcast
+[info]                   │                                                ; - bench.ImplVsImplicitly::baseline@12 (line 16)
+[info]                   │                                                ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@16 (line 163)
+[info]                   │  ;; B12: #	B22 B13 &lt;- B11  Freq: 83147.3
+[info]   0.45%    0.44%  │  0x00007ff7173ab140: mov    %r8,(%rsp)
+[info]   0.01%           │  0x00007ff7173ab144: lea    (%r12,%r10,8),%rdx  ;*areturn
+[info]                   │                                                ; - bench.ImplVsImplicitly::baseline@15 (line 16)
+[info]                   │                                                ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@16 (line 163)
+[info]   9.19%   10.87%  │  0x00007ff7173ab148: mov    0x18(%rsp),%rsi
+[info]   0.05%    0.01%  │  0x00007ff7173ab14d: nop
+[info]   0.51%    0.43%  │  0x00007ff7173ab14e: nop
+[info]   0.01%           │  0x00007ff7173ab14f: callq  0x00007ff717115e80  ; OopMap{[0]=Oop [8]=Oop [16]=Oop [24]=Oop off=244}
+[info]                   │                                                ;*invokevirtual consume
+[info]                   │                                                ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@19 (line 163)
+[info]                   │                                                ;   {optimized virtual_call}
+[info]                   │  ;; B13: #	B10 B14 &lt;- B12  Freq: 83145.6
+[info]  13.79%   11.44%  │  0x00007ff7173ab154: mov    (%rsp),%r8
+[info]   0.26%    0.16%  │  0x00007ff7173ab158: movzbl 0x94(%r8),%r11d    ;*getfield isDone
+[info]                   │                                                ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@29 (line 165)
+[info]   0.83%    0.60%  │  0x00007ff7173ab160: add    $0x1,%rbp          ; OopMap{r8=Oop [8]=Oop [16]=Oop [24]=Oop off=260}
+[info]                   │                                                ;*ifeq
+[info]                   │                                                ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@32 (line 165)
+[info]   9.26%    7.29%  │  0x00007ff7173ab164: test   %eax,0x1a218e96(%rip)        # 0x00007ff7315c4000
+[info]                   │                                                ;   {poll}
+[info]   0.01%    0.02%  │  0x00007ff7173ab16a: test   %r11d,%r11d
+[info]                   ╰  0x00007ff7173ab16d: je     0x00007ff7173ab120  ;*aload_2
+[info]                                                                    ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@35 (line 166)
+[info]                      ;; B14: #	N307 &lt;- B13 B17  Freq: 0.0842507
+[info]                      0x00007ff7173ab16f: movabs $0x7ff73000a9c0,%r10
+[info]                      0x00007ff7173ab179: callq  *%r10              ;*invokestatic nanoTime
+[info]                                                                    ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@36 (line 166)
+[info]                      0x00007ff7173ab17c: mov    0x8(%rsp),%r10
+[info]                      0x00007ff7173ab181: mov    %rbp,0x18(%r10)    ;*putfield measuredOps
+[info]                                                                    ; - bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub@51 (line 168)
+[info] ....................................................................................................
+[info]  44.24%   41.22%  <total for region 2>
+[info]
+[info] ....[Hottest Regions]...............................................................................
+[info]  52.24%   55.25%  [0x7ff7173aded8:0x7ff7173adf32] in org.openjdk.jmh.infra.Blackhole::consume
+[info]  44.24%   41.22%  [0x7ff7173ab115:0x7ff7173ab181] in bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub
+[info]   0.28%    0.28%  [0xffffffff8103e0aa:0xffffffff8103e0aa] in native_write_msr_safe ([kernel.kallsyms])
+[info]   0.16%    0.01%  [0xffffffff8165eb24:0xffffffff8165eb24] in mutex_unlock ([kernel.kallsyms])
+[info]   0.14%    0.21%  [0x7ff72f84b300:0x7ff72f84b317] in IntervalArray::operator[](int) const (libjvm.so)
+[info]   0.12%    0.04%  [0x7ff72f960fd8:0x7ff72f960fea] in CodeStrings::find(long) const (libjvm.so)
+[info]   0.10%    0.10%  [0xffffffff8103eba0:0xffffffff8103ebc5] in __ticket_spin_lock ([kernel.kallsyms])
+[info]   0.09%    0.26%  [0x7ff7300ff470:0x7ff7300ff50b] in RelocIterator::next() (libjvm.so)
+[info]   0.08%    0.12%  [0x7ff72f8241eb:0x7ff72f824219] in _ZN10LinearScan9is_sortedEP13IntervalArray.part.324 (libjvm.so)
+[info]   0.08%    0.15%  [0x7ff72f84b342:0x7ff72f84b35b] in IntervalArray::operator[](int) const (libjvm.so)
+[info]   0.07%    0.01%  [0xffffffffa0de508c:0xffffffffa0de508f] in probe_sched_process_exit ([apwr3_1])
+[info]   0.07%    0.06%  [0x7ff730e5c544:0x7ff730e5c572] in  (libc-2.15.so)
+[info]   0.06%    0.02%  [0xffffffff8165eb93:0xffffffff8165eb93] in mutex_lock ([kernel.kallsyms])
+[info]   0.05%           [0xffffffff81062038:0xffffffff8106204f] in mutex_spin_on_owner ([kernel.kallsyms])
+[info]   0.05%           [0x7ff72fbc269b:0x7ff72fbc269b] in CodeHeap::allocate(unsigned long, bool) (libjvm.so)
+[info]   0.05%    0.03%  [0x7ff7309bcd60:0x7ff7309bcd9c] in pthread_getspecific (libpthread-2.15.so)
+[info]   0.04%           [0xffffffff81668630:0xffffffff81668649] in system_call; system_call_after_swapgs ([kernel.kallsyms])
+[info]   0.04%    0.01%  [0x7ff730eb6fed:0x7ff730eb6fed] in write (libc-2.15.so)
+[info]   0.03%    0.02%  [0xffffffff8131a689:0xffffffff8131a6a4] in copy_user_generic_string ([kernel.kallsyms])
+[info]   0.03%    0.03%  [0x7ff72ffb7f90:0x7ff72ffb7fa8] in nmethod::find_pc_desc_internal(unsigned char*, bool) (libjvm.so)
+[info]   1.97%    2.16%  <...other 393 warm regions...>
+[info] ....................................................................................................
+[info] 100.00%   99.99%  <totals>
+[info]
+[info] ....[Hottest Methods (after inlining)]..............................................................
+[info]  52.24%   55.25%  org.openjdk.jmh.infra.Blackhole::consume
+[info]  44.24%   41.22%  bench.generated.ImplVsImplicitly_baseline_jmhTest::baseline_avgt_jmhStub
+[info]   0.28%    0.28%  native_write_msr_safe ([kernel.kallsyms])
+[info]   0.22%    0.36%  IntervalArray::operator[](int) const (libjvm.so)
+[info]   0.16%    0.15%   (libc-2.15.so)
+[info]   0.16%    0.01%  mutex_unlock ([kernel.kallsyms])
+[info]   0.13%    0.28%  RelocIterator::next() (libjvm.so)
+[info]   0.12%    0.04%  CodeStrings::find(long) const (libjvm.so)
+[info]   0.10%    0.10%  __ticket_spin_lock ([kernel.kallsyms])
+[info]   0.10%    0.16%  _ZN10LinearScan9is_sortedEP13IntervalArray.part.324 (libjvm.so)
+[info]   0.08%    0.09%  <unresolved>
+[info]   0.08%    0.01%  probe_sched_process_exit ([apwr3_1])
+[info]   0.06%    0.08%  vfprintf (libc-2.15.so)
+[info]   0.06%    0.01%  mutex_spin_on_owner ([kernel.kallsyms])
+[info]   0.06%    0.02%  mutex_lock ([kernel.kallsyms])
+[info]   0.06%    0.06%  _IO_fwrite (libc-2.15.so)
+[info]   0.05%           CodeHeap::allocate(unsigned long, bool) (libjvm.so)
+[info]   0.05%    0.03%  pthread_getspecific (libpthread-2.15.so)
+[info]   0.05%    0.03%  pipe_write ([kernel.kallsyms])
+[info]   0.04%           system_call; system_call_after_swapgs ([kernel.kallsyms])
+[info]   1.67%    1.02%  <...other 152 warm methods...>
+[info] ....................................................................................................
+[info] 100.00%   99.18%  <totals>
+[info]
+[info] ....[Distribution by Area]..........................................................................
+[info]  96.60%   96.57%  <generated code>
+[info]   1.45%    1.18%  <native code in ([kernel.kallsyms])>
+[info]   1.37%    1.79%  <native code in (libjvm.so)>
+[info]   0.44%    0.39%  <native code in (libc-2.15.so)>
+[info]   0.08%    0.01%  <native code in ([apwr3_1])>
+[info]   0.06%    0.03%  <native code in (libpthread-2.15.so)>
+[info]   0.01%           <native code in (sunrpc.ko)>
+[info] ....................................................................................................
+[info] 100.00%   99.99%  <totals>
+
