@@ -44,7 +44,7 @@ There is a small difference in the size of generated method:
          9: invokevirtual #25                 // Method scala/Predef$.implicitly:(Ljava/lang/Object;)Ljava/lang/Object;
         12: checkcast     #27                 // class scala/reflect/ClassTag
 
-while `impl[ClassTag[Int]]` becomes
+while `imp[ClassTag[Int]]` becomes
 
          0: getstatic     #13                 // Field scala/reflect/ClassTag$.MODULE$:Lscala/reflect/ClassTag$;
          3: invokevirtual #16                 // Method scala/reflect/ClassTag$.Int:()Lscala/reflect/ClassTag;
